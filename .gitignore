@@ -5,8 +5,10 @@
 .cache
 .history
 .lib/
+.idea
 dist/*
 target/
+project/
 lib_managed/
 src_managed/
 project/boot/
