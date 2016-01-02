@@ -2,6 +2,8 @@ package example
 
 import common._
 
+import scala.NoSuchElementException
+
 object Lists {
   /**
   * This method computes the sum of all elements in the list xs. There are
@@ -38,5 +40,9 @@ object Lists {
   * @return The largest element in `xs`
   * @throws java.util.NoSuchElementException if `xs` is an empty list
   */
-    def max(xs: List[Int]): Int = xs.max
+    def max(xs: List[Int]): Int = xs match {
+    case Nil => throw new NoSuchElementException
+    case x :: Nil => x
+    case x :: rest => x.max(max(rest))
+  }
   }
