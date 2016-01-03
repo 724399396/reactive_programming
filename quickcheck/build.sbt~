@@ -1,6 +1,6 @@
 submitProjectName := "quickcheck"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.5"
 
 scalacOptions ++= Seq("-deprecation", "-feature")
 
