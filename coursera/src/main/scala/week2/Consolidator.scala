@@ -9,7 +9,7 @@ class Consolidator(accounts: List[BankAccount]) extends Subscribe {
   private var total: Int = _
   compute()
 
-  def compute() = {
+  def compute() = d{
     total = accounts.map(_.currentBalance).sum
   }
 
