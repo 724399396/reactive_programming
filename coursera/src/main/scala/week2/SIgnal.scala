@@ -41,7 +41,7 @@ class Signal[T](t: => T) {
   def apply(): T = {
     observers += caller.value
     assert(!caller.value.observers.contains(this), "cyclic defined")
-    caller.value.observed ::= this
+    //caller.value.observed ::= this
     myValue
   }
 }
