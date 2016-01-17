@@ -1,6 +1,6 @@
 package week4
 
-import akka.actor.{Status, Actor}
+import akka.actor.{Props, Status, Actor}
 import org.jsoup.Jsoup
 
 import scala.collection.JavaConverters._
@@ -14,7 +14,9 @@ class Getter(url: String, depth: Int) extends Actor {
 
   implicit val exec = context.dispatcher
 
-  WebClient get url pipeTo self
+  def client: WebClient = AsyncWebClient
+
+  client get url pipeTo self
 
   def receive = {
     case body: String =>
@@ -37,6 +39,11 @@ class Getter(url: String, depth: Int) extends Actor {
       link <- links.iterator().asScala
     } yield link.absUrl("href")
   }
+
+  def fakeGetter(url: String, depth: Int): Props =
+    Props(new Getter(url, depth) {
+       override def client = FakeWebClient
+    })
 }
 
 object Getter {

@@ -8,6 +8,8 @@ import akka.actor.{Props, ActorRef, Actor}
 class Receptionist extends Actor {
   import Receptionist._
 
+  def controllerProps: Props = Props[Controller]
+
   def receive = waiting
 
   val waiting: Receive = {
@@ -30,7 +32,7 @@ class Receptionist extends Actor {
     reqNo += 1
     if (queue.isEmpty) waiting
     else {
-      val controller = context.actorOf(Props[Controller],s"c$reqNo")
+      val controller = context.actorOf(controllerProps,s"c$reqNo")
       controller ! Controller.Check(queue.head.url, 2)
       running(queue)
     }
