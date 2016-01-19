@@ -3,7 +3,6 @@
  */
 package actorbintree
 
-import actorbintree.BinaryTreeNode.CopyFinished
 import akka.actor._
 import scala.collection.immutable.Queue
 
